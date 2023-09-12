@@ -4,14 +4,22 @@ from flask import request
 
 user_model = UserModel()
 
+@app.post("/user")
+def register_user_controller():
+    return user_model.register_user_model(request.form)
+
 @app.get("/user")
-def getAllUsers_controller():
-    return user_model.getAllUsers_model()
+def get_all_users_controller():
+    return user_model.get_all_users_model(request.args)
 
 @app.get("/user/<id>")
-def gegUser_controller(id):
-    return user_model.getUser_model(id)
+def get_user_controller(id):
+    return user_model.get_user_model(id)
 
-@app.post("/user")
-def registerUser_controller():
-    return user_model.registerUser_model(request.form)
+@app.patch("/user/<id>")
+def update_user_controller(id):
+    return user_model.update_user_model(id, request.form)
+
+@app.delete("/user/<id>")
+def delete_user_controller(id):
+    return user_model.delete_user_model(id)
